@@ -2,21 +2,28 @@ pipeline {
     agent any
 
     stages {
+
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
-        stage('Build') {
+        stage('Install') {
             steps {
-                echo 'Building checkout API...'
+                sh 'pip install -r requirements.txt'
             }
         }
 
-        stage('Test') {
+        stage('Unit Tests') {
             steps {
-                echo 'Running tests...'
+                sh 'pytest'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t checkout-api:jenkins .'
             }
         }
     }

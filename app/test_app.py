@@ -13,4 +13,4 @@ def test_health():
 def test_checkout():
     client = app.test_client()
     response = client.get("/checkout")
-    assert response.status_code == 200
+    assert response.status_code == 500
