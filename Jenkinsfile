@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python:3.12'
+        }
+    }
 
     stages {
 
@@ -11,6 +15,7 @@ pipeline {
 
         stage('Install') {
             steps {
+                sh 'python --version'
                 sh 'pip install -r requirements.txt'
             }
         }
